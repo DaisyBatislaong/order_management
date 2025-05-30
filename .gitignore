@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+develop-eggs/
+.eggs/
+*.manifest
+*.spec
+*.log
+
+# Django
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+.env
+.env.*
+
+# VSCode & Editor junk
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Pytest
+.cache/
+.pytest_cache/
+
+# mypy & coverage
+.mypy_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Tailwind CSS (theme)
+theme/node_modules/
+theme/package-lock.json
+theme/dist/  # if your Tailwind output goes here
+
+# Django collectstatic output (customize if needed)
+# static/
+
+# Logs
+logs/
+*.log
+
+# Compiled CSS/JS artifacts (optional if you're building locally)
+*.min.css
+*.min.js
+
+# Optional: Secrets, temp backups
+secrets.json
+*.bak
+*.tmp

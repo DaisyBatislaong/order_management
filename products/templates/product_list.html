@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Product List{% endblock %}
+
+{% block content %}
+	<h1 class="text-2xl font-bold text-center mb-4">Product List</h1>
+
+	<!-- Add container + padding -->
+	 <div class="px-4 sm:px-6 lg:px-8">   
+		<button class="bg-[#F0BB78] text-[#544747]  font-bold text-base p-3 rounded-lg active:scale-95 transition-transform mb-6">
+			<a href="{% url 'product_create' %}">Add New Product</a>
+		</button>
+	</div>
+
+	<div class="px-4 sm:px-6 lg:px-8">
+		<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+			{% for product in products %}
+			<div class="relative flex flex-col rounded-2xl bg-[#7e8a4d] shadow-xl overflow-hidden">
+
+				<div class="absolute top-0 right-[-55px] rotate-45 w-[160px] text-center z-20
+							text-white text-xs font-extrabold shadow-xl
+							py-4 px-3 whitespace-normal 
+							{% if product.stock_quantity == 0 %}
+							bg-red-700
+							{% else %}
+							bg-green-700
+							{% endif %}">
+				{% if product.stock_quantity == 0 %}
+					OUT OF<br>STOCK
+				{% else %}
+					IN<br>STOCK
+				{% endif %}
+				</div>
+				<!-- Product Image -->
+
+				<!-- Card Content -->
+				<div class="flex flex-col p-8">
+					<div class="text-2xl font-bold text-center text-[#F5ECD5] pb-2">{{ product.name }}</div>
+					<div class="text-lg text-center text-[#F5ECD5] pb-2">SKU: {{ product.sku }}</div>
+					<div class="text-lg text-center text-[#F5ECD5] pb-2">₱{{ product.price }}</div>
+
+					{% comment %} <div class="text-center text-sm font-semibold text-white bg-black/20 px-2 py-1 rounded mb-4">
+					{{ product.stock_quantity }} {{ product.unit }}
+					</div> {% endcomment %}
+
+					<div class="flex justify-end pt-2">
+					<a href="{% url 'product_detail' product.id %}" 
+						class="bg-[#F0BB78] text-[#544747] w-full font-bold text-base p-3 rounded-lg text-center active:scale-95 transition-transform">
+						View Product
+					</a>
+					</div>
+				</div>
+			</div>
+
+			{% empty %}
+				<p class="text-gray-500 col-span-full">No products available.</p>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
