@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Customer List{% endblock %}
+
+{% block content %}
+  <div class="px-4 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold text-center mb-6 text-blue-700">Customer Profiles</h1>
+
+    <div class="mb-6">
+        <a href="{% url 'customer_create' %}" 
+        class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+        + Create New Customer
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {% for customer in customers %}
+        <div class="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
+          <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ customer.name }}</h2>
+          <p class="text-sm text-gray-600 mb-1">Type: {{ customer.get_customer_type_display }}</p>
+          <p class="text-sm text-gray-600 mb-1">Email: {{ customer.email|default:"N/A" }}</p>
+          <p class="text-sm text-gray-600 mb-1">Phone: {{ customer.phone|default:"N/A" }}</p>
+		  <a href="{% url 'customer_detail' customer.pk %}" class="text-blue-500 hover:underline">View</a>
+
+          {% comment %} {% if customer.shipping_address %}
+            <div class="mt-2 text-sm text-gray-700">
+              <strong>Shipping Address:</strong>
+              <p>
+                {{ customer.shipping_address.street }}, 
+                {{ customer.shipping_address.barangay }}, 
+                {{ customer.shipping_address.city }},
+                {{ customer.shipping_address.region }}, 
+                {{ customer.shipping_address.country }}
+              </p>
+            </div>
+          {% endif %} {% endcomment %}
+        </div>
+      {% empty %}
+        <p class="text-gray-500 col-span-full text-center">No customers found.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

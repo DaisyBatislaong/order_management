@@ -3,19 +3,21 @@
 {% block title %}Create Product{% endblock %}
 
 {% block content %}
-  <h1 class="text-4xl font-bold text-blue-600 mb-6">Create New Product</h1>
+  
 
-  <form method="post" class="space-y-6 bg-white shadow p-6 rounded-lg w-full max-w-xl">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <div>
-      <button type="submit" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700">
-        Save Product
-      </button>
-    </div>
-  </form>
-
-  <div class="mt-4">
-    <a href="{% url 'product_list' %}" class="text-blue-500 hover:underline">← Back to Product List</a>
+  <div class="flex justify-center items-start min-h-screen pt-10">
+    <form method="post" class="space-y-6 bg-white shadow p-6 rounded-lg w-full max-w-xl">
+		<h1 class="text-2xl font-bold text-center my-6">Create New Product</h1>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="flex justify-between">
+        <a href="{% url 'product_list' %}" class="px-5 py-2 bg-gray-300 text-white rounded-lg hover:bg-gray-300">
+          Cancel
+        </a>
+        <button type="submit" class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700">
+          Save Product
+        </button>
+      </div>
+    </form>
   </div>
 {% endblock %}

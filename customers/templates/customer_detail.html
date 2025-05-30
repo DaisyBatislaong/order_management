@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="max-w-3xl mx-auto bg-white p-6 shadow-md rounded-lg">
+	<div class="flex justify-between items-center mb-4">
+		<button class="mt-6 text-blue-600">
+			<a href="{% url 'customer_list' %}">← Back to list</a>
+		</button>
+		<button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"><a href="{% url 'customer_edit' customer.pk %}" >
+			Edit
+			</a>
+		</button>
+	</div>
+	<h1 class="text-2xl font-bold mb-4">{{ customer.name }}</h1>
+
+	<p><strong>Type:</strong> {{ customer.get_customer_type_display }}</p>
+	<p><strong>Email:</strong> {{ customer.email }}</p>
+	<p><strong>Phone:</strong> {{ customer.phone }}</p>
+	<p><strong>Status:</strong> {% if customer.is_active %}Active{% else %}Inactive{% endif %}</p>
+
+	<hr class="my-4">
+
+	<h2 class="text-xl font-semibold">Main Address</h2>
+	<ul class="list-disc ml-6">
+		{% for key, value in customer.address.items %}
+		<li><strong>{{ key|capfirst }}:</strong> {{ value }}</li>
+		{% endfor %}
+	</ul>
+
+	<h2 class="text-xl font-semibold mt-4">Shipping Address</h2>
+	<ul class="list-disc ml-6">
+		{% for key, value in customer.shipping_address.items %}
+		<li><strong>{{ key|capfirst }}:</strong> {{ value }}</li>
+		{% endfor %}
+	</ul>
+
+	{% if customer.billing_address %}
+	<h2 class="text-xl font-semibold mt-4">Billing Address</h2>
+	<ul class="list-disc ml-6">
+		{% for key, value in customer.billing_address.items %}
+		<li><strong>{{ key|capfirst }}:</strong> {{ value }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+</div>
+{% endblock %}
